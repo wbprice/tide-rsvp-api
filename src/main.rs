@@ -1,27 +1,39 @@
 use serde::{Deserialize, Serialize};
-use tide::prelude::*;
-use tide::{Body, Request, Result};
+use tide::prelude::*; // Pulls in the json! macro.
+use tide::{Body, Request};
 
 #[derive(Deserialize, Serialize)]
-struct Message {
-    text: String
+struct Cat {
+    name: String,
 }
 
-async fn echo(mut request: Request<()>) -> Result {
-    let payload : Message = request.body_json().await?;
-    println!("message: {}", payload.text);
-    Ok(payload.into())
-}
+async fn submit
 
 #[async_std::main]
-async fn main() -> Result<()> {
+async fn main() -> tide::Result<()> {
     tide::log::start();
-
     let mut app = tide::new();
 
-    app.at("/").get(|_| async { Ok("Hello, world!") });
+    app.at("/submit").post(|mut req: Request<()>| async move {
+        let cat: Cat = req.body_json().await?;
+        println!("cat name: {}", cat.name);
 
-    app.at("/echo").post(echo);
+        let cat = Cat {
+            name: "chashu".into(),
+        };
+
+        Ok(Body::from_json(&cat)?)
+    });
+
+    app.at("/animals").get(|_| async {
+        Ok(json!({
+            "meta": { "count": 2 },
+            "animals": [
+                { "type": "cat", "name": "chashu" },
+                { "type": "cat", "name": "nori" }
+            ]
+        }))
+    });
 
     app.listen("127.0.0.1:8080").await?;
     Ok(())
