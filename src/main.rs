@@ -2,12 +2,16 @@ use serde::{Deserialize, Serialize};
 use tide::prelude::*; // Pulls in the json! macro.
 use tide::{Body, Request};
 
+mod models;
+
+use crate::models::{
+    RSVP
+};
+
 #[derive(Deserialize, Serialize)]
 struct Cat {
     name: String,
 }
-
-async fn submit
 
 #[async_std::main]
 async fn main() -> tide::Result<()> {
@@ -16,11 +20,7 @@ async fn main() -> tide::Result<()> {
 
     app.at("/submit").post(|mut req: Request<()>| async move {
         let cat: Cat = req.body_json().await?;
-        println!("cat name: {}", cat.name);
-
-        let cat = Cat {
-            name: "chashu".into(),
-        };
+        println!("cat name: {}", &cat.name);
 
         Ok(Body::from_json(&cat)?)
     });
