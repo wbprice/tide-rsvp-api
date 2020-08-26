@@ -4,9 +4,7 @@ use tide::{Body, Request};
 
 mod models;
 
-use crate::models::{
-    RSVP
-};
+use crate::models::RSVP;
 
 #[derive(Deserialize, Serialize)]
 struct Cat {

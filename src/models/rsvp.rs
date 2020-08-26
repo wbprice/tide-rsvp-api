@@ -1,9 +1,5 @@
+use crate::{ContactStatus, DietaryRestrictions, DishPreferences};
 use uuid::Uuid;
-use crate::{
-    ContactStatus,
-    DietaryRestrictions,
-    DishPreferences
-};
 
 pub struct RSVP {
     pub household_id: Uuid,
