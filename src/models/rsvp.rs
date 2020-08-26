@@ -1,4 +1,4 @@
-use crate::{ContactStatus, DietaryRestrictions, DishPreferences};
+use crate::models::{ContactStatus, DietaryRestrictions, DishPreferences};
 use uuid::Uuid;
 
 pub struct RSVP {
