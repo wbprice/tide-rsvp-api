@@ -3,8 +3,8 @@ use std::collections::HashMap;
 use uuid::Uuid;
 use rusoto_dynamodb::{DynamoDbClient, DynamoDb, QueryInput, AttributeValue};
 use rusoto_core::Region;
+use dynomite::FromAttributes;
 use tide::{Result, Error, StatusCode};
-use anyhow::*;
 
 use crate::models::RSVP;
 
@@ -32,12 +32,15 @@ impl RSVPService {
             ..QueryInput::default()
         }).await;
 
+        // Check the request
         if let Ok(response) = request {
+            // If the request was successful, convert the response into an array of RSVP items
             match response.items {
                 Some(items) => {
                     let rsvps: Vec<RSVP> = items
                         .into_iter()
-                        .map(|item| serde_dynamodb::from_hashmap(item)).unwrap();
+                        .map(|item| RSVP::from_attrs(item).unwrap())
+                        .collect();
                     Ok(rsvps)
                 },  
                 None => {

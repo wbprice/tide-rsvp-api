@@ -15,7 +15,7 @@ pub struct RSVP {
     pub contact_status: ContactStatus,
     pub dietary_restrictions: Option<DietaryRestrictions>,
     pub dietary_restrictions_other: Option<String>,
-    pub dish_preferences: Option<DishPreferences>,
+    pub dish_preferences: Option<DishPreferences>
 }
 
 pub struct RSVPQuery {
