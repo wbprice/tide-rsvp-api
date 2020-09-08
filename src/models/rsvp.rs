@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
 use crate::models::{ContactStatus, DietaryRestrictions, DishPreferences};
-use uuid::Uuid;
 use dynomite::Item;
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
 #[derive(Serialize, Deserialize, Item, Clone)]
 pub struct RSVP {
@@ -14,9 +14,5 @@ pub struct RSVP {
     pub attending: bool,
     pub contact_status: ContactStatus,
     pub dietary_restrictions: Option<DietaryRestrictions>,
-    pub dish_preferences: Option<DishPreferences>
-}
-
-pub struct RSVPQuery {
-    household_id: Uuid,
+    pub dish_preferences: Option<DishPreferences>,
 }

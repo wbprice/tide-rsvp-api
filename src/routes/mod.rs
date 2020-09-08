@@ -1,6 +1,3 @@
 mod rsvp;
 
-pub use self::{
-    rsvp::put_rsvp,
-    rsvp::get_rsvp
-};
+pub use self::{rsvp::get_rsvp, rsvp::put_rsvp};

@@ -1,5 +1,3 @@
 mod rsvp;
 
-pub use self::{
-    rsvp::RSVPService
-};
+pub use self::rsvp::RSVPService;

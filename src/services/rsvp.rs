@@ -1,6 +1,6 @@
 use dynomite::{attr_map, FromAttributes, Item};
 use rusoto_core::Region;
-use rusoto_dynamodb::{DynamoDb, DynamoDbClient, PutItemInput, QueryInput, GetItemInput};
+use rusoto_dynamodb::{DynamoDb, DynamoDbClient, GetItemInput, PutItemInput, QueryInput};
 use std::env;
 use tide::{Error, Result, StatusCode};
 use uuid::Uuid;

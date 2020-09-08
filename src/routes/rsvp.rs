@@ -1,6 +1,5 @@
-use serde_json::Value;
 use tide::prelude::*;
-use tide::{Body, Error, Request, Response, Result, StatusCode};
+use tide::{Body, Request, Response, Result, StatusCode};
 
 use crate::{
     models::{RSVPQuery, RSVP},
@@ -13,13 +12,15 @@ pub async fn put_rsvp(mut req: Request<()>) -> Result<Response> {
 
     match RSVPService.put(rsvp_id, rsvp.clone()).await {
         Ok(_) => Ok(Body::from_json(&rsvp)?.into()),
-        Err(err) => Ok(Response::new(StatusCode::InternalServerError)),
+        Err(_) => Ok(Response::new(StatusCode::InternalServerError)),
     }
 }
 
-pub async fn get_rsvp(mut req: Request<()>) -> Result<Value> {
+pub async fn get_rsvp(req: Request<()>) -> Result<Response> {
     let query: RSVPQuery = req.query()?;
 
-    let household: Vec<RSVP> = RSVPService.get_by_household(query.household_id).await;
-    Ok(json!(household));
+    match RSVPService.get_by_household(query.household_id).await {
+        Ok(rsvps) => Ok(Body::from_json(&rsvps)?.into()),
+        Err(_) => Ok(Response::new(StatusCode::InternalServerError)),
+    }
 }
