@@ -21,6 +21,9 @@ pub async fn get_rsvp(req: Request<()>) -> Result<Response> {
 
     match RSVPService.get_by_household(query.household_id).await {
         Ok(rsvps) => Ok(Body::from_json(&rsvps)?.into()),
-        Err(_) => Ok(Response::new(StatusCode::InternalServerError)),
+        Err(error) => {
+            dbg!(error);
+            Ok(Response::new(StatusCode::InternalServerError))
+        }
     }
 }
