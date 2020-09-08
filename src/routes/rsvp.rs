@@ -1,5 +1,5 @@
-use tide::prelude::*;
 use tide::{Body, Request, Response, Result, StatusCode};
+use uuid::Uuid;
 
 use crate::{
     models::{RSVPQuery, RSVP},
@@ -7,10 +7,10 @@ use crate::{
 };
 
 pub async fn put_rsvp(mut req: Request<()>) -> Result<Response> {
-    let rsvp_id = req.param("rsvp_id")?;
+    let _rsvp_id : Uuid = req.param("rsvp_id")?;
     let rsvp: RSVP = req.body_json().await?;
 
-    match RSVPService.put(rsvp_id, rsvp.clone()).await {
+    match RSVPService.put(rsvp.clone()).await {
         Ok(_) => Ok(Body::from_json(&rsvp)?.into()),
         Err(_) => Ok(Response::new(StatusCode::InternalServerError)),
     }

@@ -1,8 +1,8 @@
-use dynomite::{attr_map, FromAttributes, Item};
+use dynomite::{attr_map, FromAttributes};
 use rusoto_core::Region;
-use rusoto_dynamodb::{DynamoDb, DynamoDbClient, GetItemInput, PutItemInput, QueryInput};
+use rusoto_dynamodb::{DynamoDb, DynamoDbClient, PutItemInput, QueryInput};
 use std::env;
-use tide::{Error, Result, StatusCode};
+use tide::{Result};
 use uuid::Uuid;
 
 use crate::models::RSVP;
@@ -39,7 +39,7 @@ impl RSVPService {
         }
     }
 
-    pub async fn put(&self, id: Uuid, rsvp: RSVP) -> Result<()> {
+    pub async fn put(&self, rsvp: RSVP) -> Result<()> {
         let client = DynamoDbClient::new(Region::UsEast1);
         let table_name = env::var("RSVP_TABLE_NAME")?;
 
