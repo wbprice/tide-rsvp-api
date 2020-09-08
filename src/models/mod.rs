@@ -5,5 +5,5 @@ mod rsvp;
 
 pub use self::{
     contact_status::ContactStatus, dietary_restrictions::DietaryRestrictions,
-    dish_preferences::DishPreferences, rsvp::RSVP,
+    dish_preferences::DishPreferences, rsvp::RSVP, rsvp::RSVPQuery
 };
