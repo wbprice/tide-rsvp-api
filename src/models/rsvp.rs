@@ -3,7 +3,7 @@ use crate::models::{ContactStatus, DietaryRestrictions, DishPreferences};
 use uuid::Uuid;
 use dynomite::Item;
 
-#[derive(Serialize, Deserialize, Item)]
+#[derive(Serialize, Deserialize, Item, Clone)]
 pub struct RSVP {
     #[dynomite(partition_key)]
     pub household_id: Uuid,
@@ -14,7 +14,6 @@ pub struct RSVP {
     pub attending: bool,
     pub contact_status: ContactStatus,
     pub dietary_restrictions: Option<DietaryRestrictions>,
-    pub dietary_restrictions_other: Option<String>,
     pub dish_preferences: Option<DishPreferences>
 }
 
