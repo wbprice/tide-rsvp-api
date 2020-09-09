@@ -4,3 +4,15 @@ services:
     build: ./
     ports:
       - "8080:8080"
+    links:
+      - "db"
+    environment:
+      - RSVP_TABLE_NAME=rsvp_table
+      - AWS_ACCESS_KEY_ID=badkey
+      - AWS_SECRET_ACCESS_KEY=badkey
+      - REGION=us-east-1
+
+  db:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - "8000:8000"
