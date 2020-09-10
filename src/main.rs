@@ -3,8 +3,9 @@ mod routes;
 mod services;
 
 use crate::routes::{get_rsvp, put_rsvp};
+use async_std;
 
-#[async_std::main]
+#[tokio::main]
 async fn main() -> tide::Result<()> {
     tide::log::start();
     let mut app = tide::new();

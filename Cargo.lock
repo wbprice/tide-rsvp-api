@@ -114,16 +114,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cff77d8686867eceff3105329d4698d96c2391c176d5d03adc90c7389162b5b8"
 
 [[package]]
-name = "async-attributes"
-version = "1.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "efd3d156917d94862e779f356c5acae312b08fd3121e792c857d7928c8088423"
-dependencies = [
- "quote",
- "syn",
-]
-
-[[package]]
 name = "async-channel"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -233,7 +223,6 @@ version = "1.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "46c8da367da62b8ff2313c406c9ac091c1b31d67a165becdd2de380d846260f7"
 dependencies = [
- "async-attributes",
  "async-executor",
  "async-io",
  "async-mutex",
@@ -244,7 +233,7 @@ dependencies = [
  "futures-core",
  "futures-io",
  "futures-lite",
- "futures-timer",
+ "futures-timer 3.0.2",
  "kv-log-macro",
  "log",
  "memchr",
@@ -788,6 +777,12 @@ checksum = "bdb66b5f09e22019b1ab0830f7785bcea8e7a42148683f99214f73f8ec21a626"
 dependencies = [
  "once_cell",
 ]
+
+[[package]]
+name = "futures-timer"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a1de7508b218029b0f01662ed8f61b1c964b3ae99d6f25462d0f55a595109df6"
 
 [[package]]
 name = "futures-timer"
@@ -1994,7 +1989,6 @@ dependencies = [
 name = "test-tide"
 version = "0.1.0"
 dependencies = [
- "async-std",
  "dynomite",
  "dynomite-derive",
  "rusoto_core",
@@ -2002,6 +1996,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tide",
+ "tokio-async-std",
  "uuid",
 ]
 
@@ -2105,11 +2100,34 @@ dependencies = [
  "mio",
  "mio-named-pipes",
  "mio-uds",
+ "num_cpus",
  "pin-project-lite",
  "signal-hook-registry",
  "slab",
  "tokio-macros",
  "winapi 0.3.9",
+]
+
+[[package]]
+name = "tokio-async-std"
+version = "1.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d22fe248cf00a0d8852f1b2f1fe2a2eb5e72908b30f8f3ea924387032e114448"
+dependencies = [
+ "crossbeam-utils",
+ "futures-core",
+ "futures-io",
+ "futures-timer 2.0.2",
+ "log",
+ "memchr",
+ "mio",
+ "mio-uds",
+ "num_cpus",
+ "once_cell",
+ "pin-project-lite",
+ "pin-utils",
+ "slab",
+ "tokio",
 ]
 
 [[package]]
